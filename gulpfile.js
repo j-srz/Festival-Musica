@@ -57,7 +57,11 @@ const versionAvif = (done) => {
 };
 
 const javascript = (done) => {
-  src("src/js/**/*.js").pipe(terser()).pipe(dest("build/js"));
+  src("src/js/**/*.js")
+    .pipe(sourcemaps.init())
+    .pipe(terser())
+    .pipe(sourcemaps.write("."))
+    .pipe(dest("build/js"));
 
   done();
 };
